@@ -32,12 +32,18 @@ export function ContactForm() {
   });
 
   async function onSubmit(values: ContactFormValues) {
-    // 데모: 실제 전송 대신 짧은 지연 후 성공 토스트
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    toast.success("문의가 접수되었습니다.", {
-      description: `${values.name}님, 빠른 시일 내에 답변드리겠습니다.`,
-    });
-    reset();
+    try {
+      // 데모: 실제 전송 대신 짧은 지연 후 성공 토스트
+      // 실제 구현 시 이 자리에 서버 액션/API 호출을 넣고,
+      // 응답이 실패하면 throw 하도록 작성한다.
+      await new Promise((resolve) => setTimeout(resolve, 600));
+      toast.success("문의가 접수되었습니다.", {
+        description: `${values.name}님, 빠른 시일 내에 답변드리겠습니다.`,
+      });
+      reset();
+    } catch {
+      // TODO(human): 전송 실패 시 사용자 피드백 처리
+    }
   }
 
   return (
